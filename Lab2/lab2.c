@@ -50,4 +50,4 @@ int main()
     return 0;
 }
 
-//gcc lab2.c && ./a.outefefefe
+//gcc lab2.c && ./a.out
