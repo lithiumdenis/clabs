@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int init(int ***p, int size_x, int size_y)
+void init(int ***p, int size_x, int size_y)
 {
     int **array = malloc (size_x * sizeof (int *));
 
@@ -9,13 +9,11 @@ int init(int ***p, int size_x, int size_y)
         array[i] = malloc(size_y * sizeof(int));
 
     *p = array;
-    return 0;
 }
 
 
 void fill_info(int **array2, int nrows, int ncolumns)
 {
-
     int i, j;
     for(i=0; i < nrows; i++)
     {
