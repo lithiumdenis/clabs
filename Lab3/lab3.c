@@ -1,62 +1,59 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void init(int ***p, int size_x, int size_y)
+void init(int ***p, int nrows, int ncolumns)
 {
-    int **array = malloc (size_x * sizeof (int *));
+    int i;
+    int **tmp = malloc(nrows * sizeof(int *));
+	tmp[0] = malloc(nrows * ncolumns * sizeof(int));
+	for(i = 1; i < nrows; i++)
+		tmp[i] = tmp[0] + i * ncolumns;
 
-    for (int i = 0; i < size_x; i++)
-        array[i] = malloc(size_y * sizeof(int));
-
-    *p = array;
+    *p = tmp;
 }
 
 
-void fill_info(int **array2, int nrows, int ncolumns)
+void fill_info(int **arr, int nrows, int ncolumns)
 {
     int i, j;
-    for(i=0; i < nrows; i++)
+    for(i = 0; i < nrows; i++)
     {
-        for(j=0; j < ncolumns; j++)
+        for(j = 0; j < ncolumns; j++)
         {
             printf("a[%d][%d] = ", i, j);
-            scanf("%d", &array2[i][j]);
+            scanf("%d", &arr[i][j]);
         }
     }
 }
 
-void print_info(int **array2, int nrows, int ncolumns)
+void print_info(int **arr, int nrows, int ncolumns)
 {
     int i, j;
-    for(i=0; i < nrows; i++)
+    for(i = 0; i < nrows; i++)
     {
-        for(j=0; j < ncolumns; j++)
+        for(j = 0; j < ncolumns; j++)
         {
-            printf("arr[%d][%d] = %d\n", i, j, array2[i][j]);
+            printf("arr[%d][%d] = %d\n", i, j, arr[i][j]);
         }
     }
 }
 
-void finit(int **x, int nrows)
+void finit(int **arr)
 {
-    for (int i = 0; i < nrows; i++) 
-    {
-        free(x[i]);
-    }
-    free(x);
+    free((void *)arr[0]);
+	free((void *)arr);
 }
 
 int main()
 {
 
-    int i, j, nrows = 2, ncolumns = 2;
+    int i, j, nrows = 2, ncolumns = 3;
+    int **arr;
 
-    int **array2;
-    init(&array2, nrows, ncolumns);
-
-    fill_info(array2, nrows, ncolumns);
-    print_info(array2, nrows, ncolumns);
-    finit(array2, nrows);
+    init(&arr, nrows, ncolumns);
+    fill_info(arr, nrows, ncolumns);
+    print_info(arr, nrows, ncolumns);
+    finit(arr);
     return 0;
 }
 
