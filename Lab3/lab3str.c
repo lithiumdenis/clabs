@@ -24,7 +24,7 @@ void fill_info(char **arr, int nrows)
 
 void print_info(char **arr, int nrows)
 {
-    int i, j;
+    int i;
     for(i = 0; i < nrows; i++)
     {
         printf("str_out[%d] = %s\n", i, arr[i]);
@@ -40,7 +40,7 @@ void finit(char **arr)
 int main()
 {
 
-    int i, j, nrows = 5, ncolumns = 200;
+    int nrows = 5, ncolumns = 200;
     char **arr;
 
     init(&arr, nrows, ncolumns);
